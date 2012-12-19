@@ -26,7 +26,7 @@ src_tests: ebin_tests
 	cd tests;erl -make
 
 src/herml.app: ebin
-	cp src/herml.app ebin
+	cp src/herml.app.src ebin/herml.app
 
 src/herml_scan.erl:
 	${ERL} -noshell -s init stop -eval 'leex:file("src/herml_scan.xrl")'

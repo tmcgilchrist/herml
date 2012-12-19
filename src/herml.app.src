@@ -2,7 +2,8 @@
  [
   {description, "Haiku markup for Erlang"},
   {vsn, "0.1"},
-  {modules, [herml_htmlizer,
+  {modules, [herml_compiler, herml,
+  herml_htmlizer,
              herml_manager,
              herml_parse,
              herml_parser,

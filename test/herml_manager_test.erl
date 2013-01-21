@@ -1,4 +1,4 @@
--module(test_herml_manager).
+-module(herml_manager_test).
 
 -author("kevin@hypotheticalabs.com").
 
@@ -6,7 +6,7 @@
 
 -define(DEFAULT_MGR, herml_mgr).
 
-dev_mode_test_() ->
+dev_mode_test() ->
   {setup, fun() -> herml_manager:start_link(?DEFAULT_MGR, "tests/examples", [{development, true}]) end,
    fun({ok, _P}) -> herml_manager:shutdown(?DEFAULT_MGR),
                   file:delete("tests/examples/mutate.herml") end,
@@ -18,7 +18,7 @@ dev_mode_test_() ->
         {ok, R1} = herml_manager:execute_template(?DEFAULT_MGR, "mutate.herml", []),
         ?assertMatch("goodbye, world\n", string:strip(lists:flatten(R1))) end]}.
 
-prod_mode_test_() ->
+prod_mode_test() ->
   {setup, fun() -> herml_manager:start_link(?DEFAULT_MGR, "tests/examples") end,
    fun({ok, _P}) -> herml_manager:shutdown(?DEFAULT_MGR),
                   file:delete("tests/examples/mutate.herml") end,

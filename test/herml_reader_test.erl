@@ -1,16 +1,16 @@
--module(test_herml_reader).
+-module(herml_reader_test).
 
 -author("kevin@hypotheticalabs.com").
 
 -include_lib("eunit/include/eunit.hrl").
 
-basic_test_() ->
+basic_test() ->
   [?_assertMatch([{0, "This is a test file.", []},
                   {0, "It tests line breaking.", []},
                   {0, "There should be three lines.", []}],
                  herml_reader:file("tests/examples/simple_file.herml"))].
 
-nesting_test_() ->
+nesting_test() ->
   [?_assertMatch([{0, "This is a line.",
                    [{1, "  This is another line.",[]},
                     {1, "  This line is on the same line as the other one.",
@@ -27,5 +27,5 @@ nesting_test_() ->
                    [{1, "  Third group four.",[]}]}],
                  herml_reader:file("tests/examples/simple_nesting.herml"))].
 
-error_test_() ->
+error_test() ->
   [?_assertThrow({error, bad_indent, _}, herml_reader:file("tests/examples/bad_indent.herml"))].

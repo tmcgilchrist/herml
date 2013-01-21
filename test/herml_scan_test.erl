@@ -1,10 +1,10 @@
--module(test_herml_scan).
+-module(herml_scan_test).
 
 -author("kevin@hypotheticalabs.com").
 
 -include_lib("eunit/include/eunit.hrl").
 
-tokenizing_test_() ->
+tokenizing_test() ->
   [?_assertMatch({ok, [{tag_start, _, _}], _}, herml_scan:string("%")),
    ?_assertMatch({ok, [{class_start, _, _}], _}, herml_scan:string(".")),
    ?_assertMatch({ok, [{id_start, _, _}], _}, herml_scan:string("#")),
@@ -23,5 +23,5 @@ tokenizing_test_() ->
    ?_assertMatch({ok, [{chr, _, "abc-def"}], _}, herml_scan:string("abc-def")),
    ?_assertMatch({ok, [{lt, _, "<"}], _}, herml_scan:string("<")),
    ?_assertMatch({ok, [{gt, _, ">"}], _}, herml_scan:string(">")),
-   ?_assertMatch({ok, [{string, _, "http://weblog.hypotheticalabs.com/?p=139"}], _}, 
+   ?_assertMatch({ok, [{string, _, "http://weblog.hypotheticalabs.com/?p=139"}], _},
               herml_scan:string("'http://weblog.hypotheticalabs.com/?p=139'"))].

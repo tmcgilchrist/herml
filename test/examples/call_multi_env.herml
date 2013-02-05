@@ -1,4 +1,4 @@
 %html
   %body
     #foo
-      @@test_herml_htmlizer:emit_multi('Hello, world', '500')
+      @@herml_htmlizer_test:emit_multi('Hello, world', '500')

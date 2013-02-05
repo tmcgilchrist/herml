@@ -1,2 +1,26 @@
+* Major rewrite to support generating compiled modules ala ErlyDTL
+  -> rename / refactor interface to match ErlyDTL
+  -> write new code in herml_compiler and use herml_parser to parse code.
+  -> need simple eunit test to exercise the new interfaces
+* setup TravisCI for project (DONE)
+* clean up README.md file.
+* rename tests (DONE)
+* check against Haml ruby compiler and see how much syntax we still cover.
+* update README.md to reflect refactoring goals and use of rebar to build it.
 * Add a real front-end to manage and serve herml templates
 * Add the "alligator" operators (<>)
+
+
+Essentially what we want to do is convert the haml into an erlang AST that will produce valid HTML when called via the render/2 method.
+
+So we produce a module in code
+-module(herml_template).
+-exports(render/).
+
+render(Variables) ->
+  IOList.
+  % where the contents here are the Haml/AST executable!!!!!
+
+Questions
+----------
+* wonder if we can convert from an AST back to Erlang code? ie can we roundtrip?

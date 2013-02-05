@@ -10,7 +10,6 @@ clean_gen:
 
 tests: clean src_src src_tests
 	${ERL} -pz ebin -pz ebin_tests -b start_sasl -noshell -s init stop -eval 'test_suite:test().'
-
 ebin:
 	mkdir ebin
 
@@ -23,7 +22,7 @@ src_src: ebin src/herml_parse.erl src/herml.app
 	cd src;erl -make
 
 src_tests: ebin_tests
-	cd tests;erl -make
+	cd test;erl -make
 
 src/herml.app: ebin
 	cp src/herml.app.src ebin/herml.app

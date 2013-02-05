@@ -17,7 +17,7 @@ Tests
 
 From a Unix shell, run:
 
-    make clean tests
+    make test
 
 Template compilation
 --------------------

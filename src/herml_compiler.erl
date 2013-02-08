@@ -14,8 +14,9 @@
 
 %% TODO we want this to be the interface.
 %% it compiles the HAML file into a module.
-compile(File, Module) ->
-    compile(File, Module, []).
+compile(FileOrBinary, Module) ->
+    compile(FileOrBinary, Module, []).
+
 compile(Binary, Module, Options) when is_binary(Binary) ->
     File = "",
     Context = init_haml_context(File, Module, Options),
@@ -37,7 +38,7 @@ compile(File, Module, Options) ->
     case herml_parser:file(File) of
         HamlParseTree ->
             case compile_to_binary(File, HamlParseTree, Context) of
-                {ok, Module1, _, _} ->
+                {ok, Module1, Bin, _} ->
                     {ok, Module1};
                 Err ->
                     Err
@@ -52,7 +53,6 @@ compile_to_binary(File, _HamlParseTree, Context) ->
     ModuleAst  = erl_syntax:attribute(erl_syntax:atom(module), [erl_syntax:atom(Module)]),
     ExportAst = erl_syntax:attribute(erl_syntax:atom(export),
                                      [erl_syntax:list([erl_syntax:arity_qualifier(erl_syntax:atom(render), erl_syntax:integer(0))])]),
-    %% TODO debug io:format call
     Render0FunctionAst = erl_syntax:function(erl_syntax:atom(render),
                                              [erl_syntax:clause([], none, [erl_syntax:application(erl_syntax:atom(io),     % Module
                                                                                                   erl_syntax:atom(format), % Method Name

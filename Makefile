@@ -1,6 +1,6 @@
 all: compile
 
-test:
+test: compile
 	rebar eunit
 
 compile:
